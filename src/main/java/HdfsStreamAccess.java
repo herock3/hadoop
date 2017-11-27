@@ -18,11 +18,9 @@ public class HdfsStreamAccess {
     @Before
     public void init() throws Exception{
 
-        conf = new Configuration();
-        //拿到一个文件系统操作的客户端实例对象
-//		fs = FileSystem.get(conf);
+
         //可以直接传入 uri和用户身份
-        fs = FileSystem.get(new URI("hdfs://mini1:9000"),conf,"hadoop");
+        fs = FileSystem.get(new URI("hdfs://mini1:9000"),new Configuration(),"hadoop");
     }
 
 
@@ -33,10 +31,7 @@ public class HdfsStreamAccess {
     @Test
     public void testUpload() throws Exception {
 
-        FSDataOutputStream outputStream = fs.create(new Path("/angelababy.love"), true);
-        FileInputStream inputStream = new FileInputStream("c:/angelababy.love");
 
-        IOUtils.copy(inputStream, outputStream);
 
     }
 
@@ -48,11 +43,6 @@ public class HdfsStreamAccess {
     @Test
     public void testDownLoad() throws Exception {
 
-        FSDataInputStream inputStream = fs.open(new Path("/angelababy.love"));
-
-        FileOutputStream outputStream = new FileOutputStream("d:/angelababy.love");
-
-        IOUtils.copy(inputStream, outputStream);
 
     }
 
@@ -60,13 +50,7 @@ public class HdfsStreamAccess {
     @Test
     public void testRandomAccess() throws Exception{
 
-        FSDataInputStream inputStream = fs.open(new Path("/angelababy.love"));
 
-        inputStream.seek(12);
-
-        FileOutputStream outputStream = new FileOutputStream("d:/angelababy.love.part2");
-
-        IOUtils.copy(inputStream, outputStream);
 
 
     }
@@ -80,9 +64,6 @@ public class HdfsStreamAccess {
     @Test
     public void testCat() throws IllegalArgumentException, IOException{
 
-        FSDataInputStream in = fs.open(new Path("/angelababy.love"));
-
-//        IOUtils.copy(in, System.out);
 
 
     }
