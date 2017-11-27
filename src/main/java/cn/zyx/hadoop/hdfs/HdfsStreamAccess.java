@@ -1,6 +1,9 @@
+package cn.zyx.hadoop.hdfs;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 
 import org.apache.commons.io.IOUtils;
@@ -30,9 +33,15 @@ public class HdfsStreamAccess {
      */
     @Test
     public void testUpload() throws Exception {
-
-
-
+         FSDataOutputStream os = fs.create(new Path("/test"), true);fs.create(new Path("/test"), true);
+         FileInputStream is = new FileInputStream("c:/test.txt");
+         IOUtils.copy(is,os);
+         if(os!=null){
+             os.close();
+         }
+         if(is!=null){
+             is.close();
+         }
     }
 
 
@@ -42,17 +51,32 @@ public class HdfsStreamAccess {
      */
     @Test
     public void testDownLoad() throws Exception {
-
+        FSDataInputStream is = fs.open(new Path("/test.txt")); fs.open(new Path("/test.txt"));
+        FileOutputStream os =new FileOutputStream("d:/");
+        IOUtils.copy(is,os);
+        if(os!=null){
+            os.close();
+        }
+        if(is!=null){
+            is.close();
+        }
 
     }
 
 
     @Test
     public void testRandomAccess() throws Exception{
-
-
-
-
+        FSDataInputStream is = fs.open(new Path("/test.txt"));
+        //偏置12个字节输入
+        is.seek(12);
+        FileOutputStream os = new FileOutputStream("d:test.txt");
+        IOUtils.copy(is,os);
+        if(os!=null){
+            os.close();
+        }
+        if(is!=null){
+            is.close();
+        }
     }
 
 
@@ -64,8 +88,9 @@ public class HdfsStreamAccess {
     @Test
     public void testCat() throws IllegalArgumentException, IOException{
 
+        FSDataInputStream in = fs.open(new Path("/angelababy.love"));
 
-
+        IOUtils.copy(in, System.out);
     }
 
 }
