@@ -82,9 +82,9 @@ public class HdfsStreamAccess {
 
         FSDataInputStream in = fs.open(new Path("/angelababy.love"));
 
-        IOUtils.copy(in, System.out);
+//        IOUtils.copy(in, System.out);
 
-//		IOUtils.copyBytes(in, System.out, 1024);
+
     }
 
 }
