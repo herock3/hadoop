@@ -10,6 +10,7 @@ import cn.zyx.hadoop.rpc.protocol.IuserLoginService;
 public class UserLoginAction {
 	public static void main(String[] args) throws Exception {
 		IuserLoginService userLoginService = RPC.getProxy(IuserLoginService.class, 100L, new InetSocketAddress("localhost", 9999), new Configuration());
+		Thread.sleep(1000*5);
 		String login = userLoginService.login("angelababy", "1314520");
 		System.out.println(login);
 		

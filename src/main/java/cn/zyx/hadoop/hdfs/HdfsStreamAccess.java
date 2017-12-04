@@ -1,9 +1,11 @@
 package cn.zyx.hadoop.hdfs;
+/**
+ * 流的方式读取HDFS文件，其目的是为了后期的MapReduce运算，流可以被分割成不同的段，然后给不同的map计算
+ */
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 
 import org.apache.commons.io.IOUtils;
@@ -33,7 +35,7 @@ public class HdfsStreamAccess {
      */
     @Test
     public void testUpload() throws Exception {
-         FSDataOutputStream os = fs.create(new Path("/test"), true);fs.create(new Path("/test"), true);
+         FSDataOutputStream os = fs.create(new Path("/test"), true);
          FileInputStream is = new FileInputStream("c:/test.txt");
          IOUtils.copy(is,os);
          if(os!=null){
