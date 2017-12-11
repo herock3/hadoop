@@ -1,4 +1,4 @@
-package cn.zyx.hadoop.mapreduce;
+package cn.zyx.hadoop.mapreduce.WordCountDemo;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;

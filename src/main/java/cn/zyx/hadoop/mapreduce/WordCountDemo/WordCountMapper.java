@@ -1,6 +1,6 @@
-package cn.zyx.hadoop.mapreduce;
+package cn.zyx.hadoop.mapreduce.WordCountDemo;
 /***
- * KEYIN:默认情况下，是mr框架所读到的一行文本的偏移量：Long，但在hadoopz中有自己更精简的序列化接口，所以不用Long,而用LongWritable
+ * KEYIN:默认情况下，是mr框架所读到的一行文本的偏移量：Long，但在hadoop中有自己更精简的序列化接口，所以不用Long,而用LongWritable
  * VALUEIN:默认情况下，是mr框架所读到的一行文本的内容：String    Text
  * KEYOUT：是用户自定义的逻辑处理完成之后输出数据的key，此处是单词，String   Text
  * VALUEOUT:是用户自定义逻辑处理完成之后输出的数据中的value,此处是单词的次数，Integer   IntegerWritable

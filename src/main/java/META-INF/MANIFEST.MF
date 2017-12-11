@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: cn.zyx.hadoop.mapreduce.WordCountDriver
+Main-Class: cn.zyx.hadoop.mapreduce.WordCountDemo.WordCountDriver
 
