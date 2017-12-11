@@ -1,11 +1,9 @@
-package cn.zyx.hadoop.mapreduce.flowsun.sort;
-
-import org.apache.hadoop.io.WritableComparable;
+package cn.zyx.hadoop.mapreduce.flowsum.origin;
 
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
-
+import org.apache.hadoop.io.WritableComparable;
 //实现序列化接口
 public class FlowBean implements WritableComparable<FlowBean>{
     //手机号

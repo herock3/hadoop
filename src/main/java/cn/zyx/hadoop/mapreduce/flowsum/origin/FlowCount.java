@@ -1,7 +1,7 @@
-package cn.zyx.hadoop.mapreduce.flowsun.partitioner;
+package cn.zyx.hadoop.mapreduce.flowsum.origin;
+
 
 import java.io.IOException;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -14,10 +14,8 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
-
-
-public class FlowCountPartition {
-    public static class FlowCountPartitionMapper extends Mapper<LongWritable, Text, Text, FlowBean> {
+public class FlowCount {
+    public static class FlowCountMapper extends Mapper<LongWritable, Text, Text, FlowBean> {
         // 减少内存占用（如果放下面，GC机制会使对象越积越多）
         private FlowBean flowBean = new FlowBean();
 
@@ -43,8 +41,7 @@ public class FlowCountPartition {
         }
     }
 
-    // 出去的是手机号和flowbean
-    public static class FlowCountPartitionReducer extends Reducer<Text, FlowBean, Text, FlowBean> {
+    public static class FlowCountReducer extends Reducer<Text, FlowBean, Text, FlowBean> {
         // 减少内存占用（如果放下面，GC机制会使对象越积越多）
         private FlowBean flowBean = new FlowBean();
 
@@ -61,27 +58,15 @@ public class FlowCountPartition {
             context.write(key, flowBean);
         }
     }
+
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         Configuration configuration = new Configuration();
-        Job job = Job.getInstance(configuration, "flowpartjob");
-        job.setJarByClass(FlowCountPartition.class);
+//      configuration.set("mapreduce.job.jar", "flowcount.jar");
+        Job job = Job.getInstance(configuration, "flowjob");
+        job.setJarByClass(FlowCount.class);
 
-        job.setMapperClass(FlowCountPartitionMapper.class);
-        job.setReducerClass(FlowCountPartitionReducer.class);
-
-        /**
-         * 加入自定义分区定义：AreaPartitioner
-         */
-        job.setPartitionerClass(AreaPartitioner.class);
-
-        /**
-         * 设置reduce task的数量，要跟AreaPartitioner返回的partitioner个数匹配
-         * 若reduce task多，会产生多余的几个空文件
-         * 若reduce task少，就会发生异常，因为有一些key没有对应reduce task接收
-         * 但reduce task数量为1时，不会产生异常，因为所有key都会给这一个reduce task
-         * reduce task和map task指的是reducer和mapper在集群中运行的实例
-         */
-        job.setNumReduceTasks(5);
+        job.setMapperClass(FlowCountMapper.class);
+        job.setReducerClass(FlowCountReducer.class);
 
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(FlowBean.class);

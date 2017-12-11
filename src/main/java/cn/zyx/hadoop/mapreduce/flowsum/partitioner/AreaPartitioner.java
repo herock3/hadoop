@@ -1,4 +1,4 @@
-package cn.zyx.hadoop.mapreduce.flowsun.partitioner;
+package cn.zyx.hadoop.mapreduce.flowsum.partitioner;
 
 import java.util.HashMap;
 

@@ -1,4 +1,4 @@
-package cn.zyx.hadoop.mapreduce.flowsun.sort;
+package cn.zyx.hadoop.mapreduce.flowsum.sort;
 
 import java.io.IOException;
 
