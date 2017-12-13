@@ -2,7 +2,8 @@ package cn.zyx.hadoop.hdfs;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.*;
-import org.junit.jupiter.api.*;
+import org.junit.*;
+
 
 import java.io.IOException;
 import java.net.URI;
@@ -11,13 +12,13 @@ import java.net.URISyntaxException;
 
 public class HDFSAPI {
     FileSystem fs=null;
-    @BeforeAll
+    @Before
     public void init() throws URISyntaxException, IOException, InterruptedException{
-        fs = FileSystem.get(new URI("hdfs://mini2:9000"),new Configuration(),"hadoop");
+        fs = FileSystem.get(new URI("hdfs://192.168.47.100:9000"),new Configuration(),"hadoop");
     }
     @Test
     public void uploadFile() throws IOException {
-        fs.copyFromLocalFile(new Path("c:\test.txt"),new Path("/path"));
+        fs.copyFromLocalFile(new Path("c:\\test2.txt"),new Path("/path"));
     }
     @Test
     public void downloadFile() throws IOException {
@@ -44,5 +45,10 @@ public class HDFSAPI {
         }
     }
 
+//    public static void main(String[] args) throws IOException, URISyntaxException, InterruptedException {
+//        HDFSAPI api=new HDFSAPI();
+//        api.init();
+//        api.uploadFile();
+//    }
 
 }

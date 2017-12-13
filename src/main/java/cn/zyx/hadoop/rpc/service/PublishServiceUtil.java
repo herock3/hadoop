@@ -4,10 +4,11 @@ import cn.zyx.hadoop.rpc.protocol.IuserLoginService;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.ipc.RPC;
 import org.apache.hadoop.ipc.RPC.Builder;
-import org.junit.Before;
-import org.junit.Test;
-import org.omg.CORBA.INITIALIZE;
 
+/***
+ *  该类相当于的Socket 的接收端级，根据setProtocol(ClientNameNodeProtocol.class)和setInstance(new MyNameNode())
+ *  确定需要接受的类
+ */
 import java.io.IOException;
 
 public class PublishServiceUtil {

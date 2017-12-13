@@ -8,14 +8,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 
+import org.junit.*;
 import org.apache.commons.io.IOUtils;
-import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.conf
+        .Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.junit.Before;
-import org.junit.Test;
+
+
 public class HdfsStreamAccess {
     private FileSystem fs = null;
     private Configuration conf = null;
@@ -45,8 +47,10 @@ public class HdfsStreamAccess {
              is.close();
          }
     }
-
-
+    @Test
+    public void test(){
+        System.out.println("test");
+    }
     /**
      * 通过流的方式获取hdfs上数据
      *
