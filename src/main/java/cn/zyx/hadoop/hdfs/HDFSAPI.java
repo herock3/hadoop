@@ -14,20 +14,21 @@ public class HDFSAPI {
     FileSystem fs=null;
     @Before
     public void init() throws URISyntaxException, IOException, InterruptedException{
-        fs = FileSystem.get(new URI("hdfs://192.168.47.100:9000"),new Configuration(),"hadoop");
+        //此处的端口一定要按照“fs.default.name”修改，若显示windows下ip和linux下不在同一网段，则关闭windows下的虚拟机之内的可能导致ip错误的软件
+        fs = FileSystem.get(new URI("hdfs://192.168.1.51:8020"),new Configuration(),"hadoop");
     }
     @Test
     public void uploadFile() throws IOException {
-        fs.copyFromLocalFile(new Path("c:\\test2.txt"),new Path("/path"));
+        fs.copyFromLocalFile(new Path("F:\\test\\test2.txt"),new Path("/test"));
     }
     @Test
     public void downloadFile() throws IOException {
-        fs.copyToLocalFile(true,new Path("/test.txt"),new Path("d:/"));
+        fs.copyToLocalFile(true,new Path("/test/test2.txt"),new Path("F:\\test"));
     }
 
     @Test
     public void testLs() throws IOException {
-        RemoteIterator<LocatedFileStatus> lsr = fs.listFiles(new Path("/"), true);
+        RemoteIterator<LocatedFileStatus> lsr = fs.listFiles(new Path("/test"), true);
         while(lsr.hasNext()) {
             LocatedFileStatus fileStatus = lsr.next();
             System.out.println("时间："+fileStatus.getAccessTime());
